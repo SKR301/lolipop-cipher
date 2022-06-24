@@ -21,7 +21,15 @@ class Lolipop:
 
     # create and return a pad matrix 
     def createPadMatrix(self, padInput):
-        print(f'creating Pad Matrix with: {padInput}')
+        padMatrix = []
+
+        for a in range(6):
+            temp = []
+            for b in range(6):
+                temp.append(padInput[a*6+b])
+            padMatrix.append(temp)
+
+        return padMatrix
 
     # encrypt the input plaintext, returns cipher and key
     def encrypt(self, plainText):
