@@ -10,6 +10,13 @@ class Lolipop:
 
     # validate the input string for pad
     def validatePadInput(self, padInput):
+        if len(padInput) < 36:
+            return False
+        if len(padInput) > 36:
+            return False
+        if set('987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ') != set(padInput):
+            return False
+        
         return True
 
     # create and return a pad matrix 

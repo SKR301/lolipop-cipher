@@ -18,9 +18,12 @@ class TestLolipop(unittest.TestCase):
 
     def test_validatePadInput(self):
         cipher = Lolipop()
-
+        
         # size<36
         self.assertFalse(cipher.validatePadInput('ASD'))
+
+        # size>36
+        self.assertFalse(cipher.validatePadInput('987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ^%'))
 
         # size = 36 but value replaced 
         self.assertFalse(cipher.validatePadInput('987654AAAAAAAAAAAAAAAAA_AAAAA#AAAAAA'))
@@ -29,7 +32,7 @@ class TestLolipop(unittest.TestCase):
         self.assertTrue(cipher.validatePadInput('987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'))
 
         # correct input 
-        self.assertTrue(cipher.validatePadInput('HIED54QPJ#UVWXONM3RSFPS9876ABK_TG2YZ'))
+        self.assertTrue(cipher.validatePadInput('TGHIXYZ8765EDCL2SFABK_4QPJ#UVW9ONM3R'))
 
     def test_createPadMatrix(self):
         cipher = Lolipop()
