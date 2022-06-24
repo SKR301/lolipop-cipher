@@ -1,15 +1,20 @@
 class Lolipop:
     def __init__(self, input='987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'):
+        input = input.upper()
         if self.validatePadInput(input):
             self.padString = input
     
+    # preprocess input string for pad
+    def preprocessPadInput(self, padInput):
+        return padInput.upper().replace('0','#').replace('1','_')
+
     # validate the input string for pad
     def validatePadInput(self, padInput):
         return True
 
     # create and return a pad matrix 
-    def createPadMatrix(self, padString):
-        print(f'creating Pad Matrix with: {padString}')
+    def createPadMatrix(self, padInput):
+        print(f'creating Pad Matrix with: {padInput}')
 
     # encrypt the input plaintext, returns cipher and key
     def encrypt(self, plainText):

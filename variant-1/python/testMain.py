@@ -1,14 +1,35 @@
 import unittest
+
+from numpy import chararray
 from Lolipop import Lolipop
 
 class TestLolipop(unittest.TestCase):
+    def test_preprocessPadInput(self):
+        cipher = Lolipop()
+
+        # random lowercase with digit[0,1] and special char 
+        self.assertTrue(cipher.preprocessPadInput('asd^#%1203#$asd%'), 'ASD^#%_2#3#$ASD%')
+
+        # random uppercase with digit[0,1] and special char 
+        self.assertTrue(cipher.preprocessPadInput('ASD^#%1203#$ASD%'), 'ASD^#%_2#3#$ASD%')
+
+        # random default input string
+        self.assertTrue(cipher.preprocessPadInput('987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'), '987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ')
+
     def test_validatePadInput(self):
+        cipher = Lolipop()
+
         # size<36
+        self.assertFalse(cipher.validatePadInput('ASD'))
+
         # size = 36 but value replaced 
-        # no input 
+        self.assertFalse(cipher.validatePadInput('987654AAAAAAAAAAAAAAAAA_AAAAA#AAAAAA'))
+
         # default input passed 
+        self.assertTrue(cipher.validatePadInput('987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'))
+
         # correct input 
-        print()
+        self.assertTrue(cipher.validatePadInput('HIED54QPJ#UVWXONM3RSFPS9876ABK_TG2YZ'))
 
     def test_createPadMatrix(self):
         cipher = Lolipop()
@@ -28,7 +49,6 @@ class TestLolipop(unittest.TestCase):
                                                                                             ['D','C','Y','Z','W','Q'],
                                                                                             ['F','9','V','P','O','N'],
                                                                                             ['M','3','R','8','7','6']])
-        print()
 
     def test_shiftRight(self):
         # row < 0
