@@ -59,4 +59,7 @@ class Shift:
 
     # shift the col down given time 
     def shiftCol(self, colNum, shiftCount, matrix):
-        print(f'shifting col {colNum} down by {shiftCount} in {matrix}')
+        transMatrix = [[row[i] for row in matrix] for i in range(len(matrix[0]))]
+        self.shiftRow(colNum, shiftCount, transMatrix)
+        matrix = [[row[i] for row in transMatrix] for i in range(len(transMatrix[0]))]
+        return matrix
