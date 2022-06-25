@@ -72,5 +72,4 @@ class PadMatrix:
             return f'Input column value is {pos[1]}. Must be between 0 and 6 [included]'
 
         return matrix[pos[0]][pos[1]]
-        
-
+       
