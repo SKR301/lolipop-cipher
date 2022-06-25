@@ -39,6 +39,8 @@ class Lolipop:
 
     # encrypt the input plaintext, returns cipher and key
     def encrypt(self, plainText):
+        plainText = plainText.upper()
+        
         relPosList = []
         currPos = (3,2)
         for a in range(0, len(plainText)):
