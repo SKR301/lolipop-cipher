@@ -153,9 +153,19 @@ class TestLolipop(unittest.TestCase):
                                                                             ['U','V','W','C','Y','Z']])
 
     def test_getPosOfChar(self):
+        shift = PadMatrix()
+        padMatrix = [['9','8','7','6','5','4'],
+                    ['Q','P','O','N','M','3'],
+                    ['R','E','D','C','L','2'],
+                    ['S','F','A','B','K','_'],
+                    ['T','G','H','I','J','#'],
+                    ['U','V','W','X','Y','Z']]
+
         # char not present 
+        self.getPosOfChar(shift.shiftCol('*', padMatrix), (-1, -1))
+
         # char present 
-        print()
+        self.getPosOfChar(shift.shiftCol('A', padMatrix), (3,2))
     
     def test_getCharAtPost(self):
         # row < 0
