@@ -1,8 +1,13 @@
+import copy
+
 class Lolipop:
     def __init__(self, input='987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'):
         input = input.upper()
+        self.padString = ''
         if self.validatePadInput(input):
             self.padString = input
+        
+        self.padMatrix = self.createPadMatrix(self.padString)
     
     # preprocess input string for pad
     def preprocessPadInput(self, padInput):
@@ -26,14 +31,30 @@ class Lolipop:
         for a in range(6):
             temp = []
             for b in range(6):
-                temp.append(padInput[a*6+b])
+                temp.append(padInput[a * 6 + b])
             padMatrix.append(temp)
 
         return padMatrix
 
     # encrypt the input plaintext, returns cipher and key
     def encrypt(self, plainText):
-        
+        relPosList = []
+        currPos = (3,2)
+        for a in range(0, len(plainText)):
+            currChar = plainText[a]
+            charPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
+            relPos = ((charPos[0] - currPos[0]) % 6, (charPos[1] - currPos[1]) % 6)
+            relPosList.append(relPos)
+            
+            # print(currChar, currPos, charPos, relPos)
+            self.padMatrix = PadMatrix().shiftCol(a%6, relPos[0], copy.deepcopy(self.padMatrix))
+            self.padMatrix = PadMatrix().shiftRow(a%6, relPos[1], copy.deepcopy(self.padMatrix))
+
+            currPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
+
+            # PadMatrix().printPadMatrix(self.padMatrix)
+        relPosList.reverse()
+        print(relPosList)
         return {'cipher':'0', 'key':[[0]]}
     
     # decrypt the input cipherText
@@ -66,11 +87,17 @@ class PadMatrix:
         return (-1,-1)
 
     # get char at input row and col 
-    def getCharAtPost(self, pos, matrix):
+    def getCharAtPos(self, pos, matrix):
         if pos[0] < 0 or pos[0] > 6:
             return f'Input row value is {pos[0]}. Must be between 0 and 6 [included]'
         if pos[1] < 0 or pos[1] > 6:
             return f'Input column value is {pos[1]}. Must be between 0 and 6 [included]'
 
         return matrix[pos[0]][pos[1]]
+
+    # print the matrix 
+    def printPadMatrix(self, matrix):
+        for row in matrix:
+            print(row)
+        print()
        

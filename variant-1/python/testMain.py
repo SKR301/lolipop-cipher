@@ -177,19 +177,19 @@ class TestLolipop(unittest.TestCase):
                     ['U','V','W','X','Y','Z']]
 
         # row < 0
-        self.assertEqual(shift.getCharAtPost((-1,0), padMatrix), 'Input row value is -1. Must be between 0 and 6 [included]')
+        self.assertEqual(shift.getCharAtPos((-1,0), padMatrix), 'Input row value is -1. Must be between 0 and 6 [included]')
 
         # row > 6
-        self.assertEqual(shift.getCharAtPost((7,0), padMatrix), 'Input row value is 7. Must be between 0 and 6 [included]')
+        self.assertEqual(shift.getCharAtPos((7,0), padMatrix), 'Input row value is 7. Must be between 0 and 6 [included]')
         
         # col < 0
-        self.assertEqual(shift.getCharAtPost((0,-1), padMatrix), 'Input column value is -1. Must be between 0 and 6 [included]')
+        self.assertEqual(shift.getCharAtPos((0,-1), padMatrix), 'Input column value is -1. Must be between 0 and 6 [included]')
         
         # col > 6
-        self.assertEqual(shift.getCharAtPost((0,7), padMatrix), 'Input column value is 7. Must be between 0 and 6 [included]')
+        self.assertEqual(shift.getCharAtPos((0,7), padMatrix), 'Input column value is 7. Must be between 0 and 6 [included]')
         
         # correct 
-        self.assertEqual(shift.getCharAtPost((0,0), padMatrix), '9')
+        self.assertEqual(shift.getCharAtPos((0,0), padMatrix), '9')
 
     def test_encrypt(self):
         cipher = Lolipop()
