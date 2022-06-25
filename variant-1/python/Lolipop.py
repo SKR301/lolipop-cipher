@@ -58,7 +58,11 @@ class PadMatrix:
     
     # get row and col of input char 
     def getPosOfChar(self, char, matrix):
-        print(f'finding position of {char}')
+        for a in range(0, 6):
+            for b in range(0, 6):
+                if matrix[a][b] == char:
+                    return (a,b)
+        return (-1,-1)
 
     # get char at input row and col 
     def getCharAtPost(self, pos, matrix):
