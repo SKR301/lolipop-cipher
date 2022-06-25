@@ -1,4 +1,5 @@
 import copy
+import math
 
 class Lolipop:
     def __init__(self, input='987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'):
@@ -46,16 +47,18 @@ class Lolipop:
             relPos = ((charPos[0] - currPos[0]) % 6, (charPos[1] - currPos[1]) % 6)
             relPosList.append(relPos)
             
-            # print(currChar, currPos, charPos, relPos)
             self.padMatrix = PadMatrix().shiftCol(a%6, relPos[0], copy.deepcopy(self.padMatrix))
             self.padMatrix = PadMatrix().shiftRow(a%6, relPos[1], copy.deepcopy(self.padMatrix))
-
             currPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
 
-            # PadMatrix().printPadMatrix(self.padMatrix)
         relPosList.reverse()
-        print(relPosList)
-        return {'cipher':'0', 'key':[[0]]}
+
+        cipherText = ''
+        for pos in relPosList:
+            cipherText += PadMatrix().getCharAtPos(pos, copy.deepcopy(self.padMatrix))
+        cipherText = cipherText.rjust(math.ceil(len(cipherText)/6)*6, '$')
+        
+        return {'cipher':cipherText, 'key':self.padMatrix}
     
     # decrypt the input cipherText
     def decrypt(self, cipherText):
