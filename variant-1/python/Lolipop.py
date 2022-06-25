@@ -33,7 +33,8 @@ class Lolipop:
 
     # encrypt the input plaintext, returns cipher and key
     def encrypt(self, plainText):
-        print(f'encrypting: {plainText}')
+        
+        return {'cipher':'0', 'key':[[0]]}
     
     # decrypt the input cipherText
     def decrypt(self, cipherText):

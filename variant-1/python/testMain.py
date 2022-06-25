@@ -192,12 +192,21 @@ class TestLolipop(unittest.TestCase):
         self.assertEqual(shift.getCharAtPost((0,0), padMatrix), '9')
 
     def test_encrypt(self):
+        cipher = Lolipop()
+
         # empty string
         # size = 1
         # size > 36
         # same character repeated 10 times 
         # same pair repeated 10 times 
-        self.assertTrue(True)
+        # normal input with custom pad
+        # normal input with default pad
+        self.assertEqual(cipher.encrypt('HELLO'), {'cipher': '$TUQ#F','key': [['U','E','H','6','3','4'],
+                                                                                ['F','O','W','M','G','9'],
+                                                                                ['C','L','2','Q','K','7'],
+                                                                                ['R','V','N','B','J','_'],
+                                                                                ['S','8','D','I','Y','#'],
+                                                                                ['T','P','A','X','5','Z']]})
     
 if __name__ == '__main__':
     unittest.main()
