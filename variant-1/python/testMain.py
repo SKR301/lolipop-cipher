@@ -1,7 +1,7 @@
 import unittest
-
-from numpy import chararray
+import copy
 from Lolipop import Lolipop
+from Lolipop import Shift
 
 class TestLolipop(unittest.TestCase):
     def test_preprocessPadInput(self):
@@ -53,31 +53,60 @@ class TestLolipop(unittest.TestCase):
                                                                                             ['F','9','V','P','O','N'],
                                                                                             ['M','3','R','8','7','6']])
 
-    def test_shiftRight(self):
+    def test_shiftRow(self):
+        shift = Shift()
+        padMatrix = [['9','8','7','6','5','4'],
+                    ['Q','P','O','N','M','3'],
+                    ['R','E','D','C','L','2'],
+                    ['S','F','A','B','K','_'],
+                    ['T','G','H','I','J','#'],
+                    ['U','V','W','X','Y','Z']]
+
         # row < 0
+        self.assertEqual(shift.shiftRow(-2, 2, copy.deepcopy(padMatrix)), [['9','8','7','6','5','4'],
+                                                                            ['Q','P','O','N','M','3'],
+                                                                            ['R','E','D','C','L','2'],
+                                                                            ['S','F','A','B','K','_'],
+                                                                            ['J','#','T','G','H','I'],
+                                                                            ['U','V','W','X','Y','Z']])
+
         # row > 6
+        self.assertEqual(shift.shiftRow(10, 2, copy.deepcopy(padMatrix)), [['9','8','7','6','5','4'],
+                                                                            ['Q','P','O','N','M','3'],
+                                                                            ['R','E','D','C','L','2'],
+                                                                            ['S','F','A','B','K','_'],
+                                                                            ['J','#','T','G','H','I'],
+                                                                            ['U','V','W','X','Y','Z']])
+
         # shift count < 0
+        self.assertEqual(shift.shiftRow(0, -2, copy.deepcopy(padMatrix)), [['7','6','5','4','9','8'],
+                                                                            ['Q','P','O','N','M','3'],
+                                                                            ['R','E','D','C','L','2'],
+                                                                            ['S','F','A','B','K','_'],
+                                                                            ['T','G','H','I','J','#'],
+                                                                            ['U','V','W','X','Y','Z']])
+
+        # shift count > 6
+        self.assertEqual(shift.shiftRow(0, 10, copy.deepcopy(padMatrix)), [['7','6','5','4','9','8'],
+                                                                            ['Q','P','O','N','M','3'],
+                                                                            ['R','E','D','C','L','2'],
+                                                                            ['S','F','A','B','K','_'],
+                                                                            ['T','G','H','I','J','#'],
+                                                                            ['U','V','W','X','Y','Z']])
+
         # correct amount 
-        print()
+        self.assertEqual(shift.shiftRow(3, 3, copy.deepcopy(padMatrix)), [['9','8','7','6','5','4'],
+                                                                            ['Q','P','O','N','M','3'],
+                                                                            ['R','E','D','C','L','2'],
+                                                                            ['B','K','_','S','F','A'],
+                                                                            ['T','G','H','I','J','#'],
+                                                                            ['U','V','W','X','Y','Z']])
 
     def test_shiftDown(self):
         # col < 0
         # col > 6
         # shift count < 0
-        # correct amount 
-        print()
-
-    def test_shiftLeft(self):
-        # row < 0
-        # row > 6
-        # shift count < 0
-        # correct amount 
-        print()
-
-    def test_shiftUp(self):
-        # col < 0
-        # col > 6
-        # shift count < 0
+        # shift count > 0
         # correct amount 
         print()
 

@@ -49,17 +49,14 @@ class Lolipop:
 
 class Shift:
     # shift the row right given time 
-    def shiftRight(self, rowNum, shiftCount, matrix):
-        print(f'shifting row {rowNum} right by {shiftCount} in {matrix}')
+    def shiftRow(self, rowNum, shiftCount, matrix):
+        rowNum = rowNum % 6
+        intercept = 6 - (shiftCount % 6)
+
+        row = matrix[rowNum]
+        matrix[rowNum] = row[intercept:] + row[0:intercept]
+        return matrix
 
     # shift the col down given time 
-    def shiftDown(self, colNum, shiftCount, matrix):
+    def shiftCol(self, colNum, shiftCount, matrix):
         print(f'shifting col {colNum} down by {shiftCount} in {matrix}')
-
-    # shift the row left given time 
-    def shiftLeft(self, rowNum, shiftCount, matrix):
-        print(f'shifting row {rowNum} left by {shiftCount} in {matrix}')
-
-    # shift the col up given time 
-    def shiftUp(self, colNum, shiftCount, matrix):
-        print(f'shifting col {colNum} up by {shiftCount} in {matrix}')
