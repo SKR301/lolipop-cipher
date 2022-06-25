@@ -39,15 +39,7 @@ class Lolipop:
     def decrypt(self, cipherText):
         print(f'decrypting: {cipherText}')
 
-    # get row and col of input char 
-    def getPosOfChar(self, char):
-        print(f'finding position of {char}')
-
-    # get char at input row and col 
-    def getCharAtPost(self, pos):
-        print(f'finding char at {pos}')
-
-class Shift:
+class PadMatrix:
     # shift the row right given time 
     def shiftRow(self, rowNum, shiftCount, matrix):
         rowNum = rowNum % 6
@@ -63,3 +55,12 @@ class Shift:
         self.shiftRow(colNum, shiftCount, transMatrix)
         matrix = [[row[i] for row in transMatrix] for i in range(len(transMatrix[0]))]
         return matrix
+    
+    # get row and col of input char 
+    def getPosOfChar(self, char, matrix):
+        print(f'finding position of {char}')
+
+    # get char at input row and col 
+    def getCharAtPost(self, pos, matrix):
+        print(f'finding char at {pos}')
+

@@ -1,7 +1,7 @@
 import unittest
 import copy
 from Lolipop import Lolipop
-from Lolipop import Shift
+from Lolipop import PadMatrix
 
 class TestLolipop(unittest.TestCase):
     def test_preprocessPadInput(self):
@@ -54,7 +54,7 @@ class TestLolipop(unittest.TestCase):
                                                                                             ['M','3','R','8','7','6']])
 
     def test_shiftRow(self):
-        shift = Shift()
+        shift = PadMatrix()
         padMatrix = [['9','8','7','6','5','4'],
                     ['Q','P','O','N','M','3'],
                     ['R','E','D','C','L','2'],
@@ -103,7 +103,7 @@ class TestLolipop(unittest.TestCase):
                                                                             ['U','V','W','X','Y','Z']])
 
     def test_shiftDown(self):
-        shift = Shift()
+        shift = PadMatrix()
         padMatrix = [['9','8','7','6','5','4'],
                     ['Q','P','O','N','M','3'],
                     ['R','E','D','C','L','2'],
@@ -151,6 +151,19 @@ class TestLolipop(unittest.TestCase):
                                                                             ['S','F','A','6','K','_'],
                                                                             ['T','G','H','N','J','#'],
                                                                             ['U','V','W','C','Y','Z']])
+
+    def test_getPosOfChar(self):
+        # char not present 
+        # char present 
+        print()
+    
+    def test_getCharAtPost(self):
+        # row < 0
+        # row > 6
+        # col < 0
+        # col > 6
+        # correct 
+        print()
 
     def test_encrypt(self):
         # empty string
