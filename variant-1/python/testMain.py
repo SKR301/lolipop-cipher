@@ -186,7 +186,7 @@ class TestLolipop(unittest.TestCase):
         self.assertEqual(shift.getCharAtPost((0,-1), padMatrix), 'Input column value is -1. Must be between 0 and 6 [included]')
         
         # col > 6
-        self.assertEqual(shift.getCharAtPost((0,7), padMatrix), 'Input row value is 7. Must be between 0 and 6 [included]')
+        self.assertEqual(shift.getCharAtPost((0,7), padMatrix), 'Input column value is 7. Must be between 0 and 6 [included]')
         
         # correct 
         self.assertEqual(shift.getCharAtPost((0,0), padMatrix), '9')
@@ -197,7 +197,7 @@ class TestLolipop(unittest.TestCase):
         # size > 36
         # same character repeated 10 times 
         # same pair repeated 10 times 
-        print()
+        self.assertTrue(True)
     
 if __name__ == '__main__':
     unittest.main()

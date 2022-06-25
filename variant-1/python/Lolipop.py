@@ -66,5 +66,11 @@ class PadMatrix:
 
     # get char at input row and col 
     def getCharAtPost(self, pos, matrix):
-        print(f'finding char at {pos}')
+        if pos[0] < 0 or pos[0] > 6:
+            return f'Input row value is {pos[0]}. Must be between 0 and 6 [included]'
+        if pos[1] < 0 or pos[1] > 6:
+            return f'Input column value is {pos[1]}. Must be between 0 and 6 [included]'
+
+        return matrix[pos[0]][pos[1]]
+        
 
