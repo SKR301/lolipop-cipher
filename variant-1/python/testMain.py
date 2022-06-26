@@ -57,20 +57,20 @@ class TestLolipop(unittest.TestCase):
         cipher = Lolipop()
 
         # dismantle default pad matrix
-        self.assertEqual(cipher.createPadMatrix([['9','8','7','6','5','4'],
-                                                ['Q','P','O','N','M','3'],
-                                                ['R','E','D','C','L','2'],
-                                                ['S','F','A','B','K','_'],
-                                                ['T','G','H','I','J','#'],
-                                                ['U','V','W','X','Y','Z']]), '987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ')
+        self.assertEqual(cipher.dismantlePadMatrix([['9','8','7','6','5','4'],
+                                                    ['Q','P','O','N','M','3'],
+                                                    ['R','E','D','C','L','2'],
+                                                    ['S','F','A','B','K','_'],
+                                                    ['T','G','H','I','J','#'],
+                                                    ['U','V','W','X','Y','Z']]), '987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ')
 
         # dismantle manual input pad string 
-        self.assertEqual(cipher.createPadMatrix([['S','5','4','A','B','K'],
-                                                ['_','X','I','J','T','G'],
-                                                ['H','L','2','#','U','E'],
-                                                ['D','C','Y','Z','W','Q'],
-                                                ['F','9','V','P','O','N'],
-                                                ['M','3','R','8','7','6']]), 'S54ABK_XIJTGHL2#UEDCYZWQF9VPONM3R876')
+        self.assertEqual(cipher.dismantlePadMatrix([['S','5','4','A','B','K'],
+                                                    ['_','X','I','J','T','G'],
+                                                    ['H','L','2','#','U','E'],
+                                                    ['D','C','Y','Z','W','Q'],
+                                                    ['F','9','V','P','O','N'],
+                                                    ['M','3','R','8','7','6']]), 'S54ABK_XIJTGHL2#UEDCYZWQF9VPONM3R876')
 
     def test_shiftRow(self):
         shift = PadMatrix()

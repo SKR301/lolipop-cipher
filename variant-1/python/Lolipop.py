@@ -37,9 +37,13 @@ class Lolipop:
 
         return padMatrix
 
-    # create the key from pad matrix 
+    # create dismantled string from pad matrix 
     def dismantlePadMatrix(self, matrix):
-
+        dismantledStr = ''
+        for row in matrix:
+            for ch in row:
+                dismantledStr += ch
+        return dismantledStr
 
     # encrypt the input plaintext, returns cipher and key
     def encrypt(self, plainText):
