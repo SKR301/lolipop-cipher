@@ -67,8 +67,9 @@ class Lolipop:
         for pos in relPosList:
             cipherText += PadMatrix().getCharAtPos(pos, copy.deepcopy(self.padMatrix))
         cipherText = cipherText.rjust(math.ceil(len(cipherText)/6)*6, '$')
-        
-        return {'cipherText':cipherText, 'key':self.padMatrix}
+        key = self.dismantlePadMatrix(self.padMatrix)
+
+        return {'cipherText':cipherText, 'key': key}
     
     # decrypt the input cipherText
     def decrypt(self, cipherText):
