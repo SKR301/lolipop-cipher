@@ -75,6 +75,7 @@ class Lolipop:
     def decrypt(self, cipherText):
         print(f'decrypting: {cipherText}')
 
+
 class PadMatrix:
     # shift the row right given time 
     def shiftRow(self, rowNum, shiftCount, matrix):
