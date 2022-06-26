@@ -37,6 +37,10 @@ class Lolipop:
 
         return padMatrix
 
+    # create the key from pad matrix 
+    def dismantlePadMatrix(self, matrix):
+
+
     # encrypt the input plaintext, returns cipher and key
     def encrypt(self, plainText):
         plainText = plainText.upper()
@@ -60,7 +64,7 @@ class Lolipop:
             cipherText += PadMatrix().getCharAtPos(pos, copy.deepcopy(self.padMatrix))
         cipherText = cipherText.rjust(math.ceil(len(cipherText)/6)*6, '$')
         
-        return {'cipher':cipherText, 'key':self.padMatrix}
+        return {'cipherText':cipherText, 'key':self.padMatrix}
     
     # decrypt the input cipherText
     def decrypt(self, cipherText):

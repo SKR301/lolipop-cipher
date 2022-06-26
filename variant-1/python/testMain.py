@@ -53,6 +53,25 @@ class TestLolipop(unittest.TestCase):
                                                                                             ['F','9','V','P','O','N'],
                                                                                             ['M','3','R','8','7','6']])
 
+    def test_dismantlePadMatrix(self):
+        cipher = Lolipop()
+
+        # dismantle default pad matrix
+        self.assertEqual(cipher.createPadMatrix([['9','8','7','6','5','4'],
+                                                ['Q','P','O','N','M','3'],
+                                                ['R','E','D','C','L','2'],
+                                                ['S','F','A','B','K','_'],
+                                                ['T','G','H','I','J','#'],
+                                                ['U','V','W','X','Y','Z']]), '987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ')
+
+        # dismantle manual input pad string 
+        self.assertEqual(cipher.createPadMatrix([['S','5','4','A','B','K'],
+                                                ['_','X','I','J','T','G'],
+                                                ['H','L','2','#','U','E'],
+                                                ['D','C','Y','Z','W','Q'],
+                                                ['F','9','V','P','O','N'],
+                                                ['M','3','R','8','7','6']]), 'S54ABK_XIJTGHL2#UEDCYZWQF9VPONM3R876')
+
     def test_shiftRow(self):
         shift = PadMatrix()
         padMatrix = [['9','8','7','6','5','4'],
@@ -194,61 +213,30 @@ class TestLolipop(unittest.TestCase):
     def test_encrypt(self):
         # empty string
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt(''), {'cipher': '','key': [['9','8','7','6','5','4'],
-                                                                    ['Q','P','O','N','M','3'],
-                                                                    ['R','E','D','C','L','2'],
-                                                                    ['S','F','A','B','K','_'],
-                                                                    ['T','G','H','I','J','#'],
-                                                                    ['U','V','W','X','Y','Z']]})
-
-        # size = 1
-        cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('H'), {'cipher': '$$$$$9','key': [['U','8','7','6','5','4'],
-                                                                            ['9','P','O','N','M','3'],
-                                                                            ['Q','E','D','C','L','2'],
-                                                                            ['R','F','A','B','K','_'],
-                                                                            ['S','G','H','I','J','#'],
-                                                                            ['T','V','W','X','Y','Z']]})
-
-        # size > 36
-        
-        # same character repeated 10 times 
-        cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('HHHHHHHHHH'), {'cipher': '$$UUUUUUUUU9','key': [['U','8','7','6','5','4'],
-                                                                                            ['9','P','O','N','M','3'],
-                                                                                            ['Q','E','D','C','L','2'],
-                                                                                            ['R','F','A','B','K','_'],
-                                                                                            ['S','G','H','I','J','#'],
-                                                                                            ['T','V','W','X','Y','Z']]})
-        
-        # same pair repeated 10 times 
-        cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('HEHEHEHEHEHEHEHEHEHE'), {'cipher': '$$$$5D5D5D5D5D5D5D5DJ8#F','key': [['U','E','D','H','5','4'], 
-                                                                                                                ['F','O','A','B','3','9'], 
-                                                                                                                ['G','I','C','L','2','Q'], 
-                                                                                                                ['R','V','W','X','K','_'], 
-                                                                                                                ['S','8','7','6','J','#'], 
-                                                                                                                ['T','P','N','M','Y','Z']]})
-
-        # normal input with custom pad
+        self.assertEqual(cipher.encrypt(''), {'cipherText': '','key': [['9','8','7','6','5','4'],
+                                                                        ['Q','P','O','N','M','3'],
+                                                                        ['R','E','D','C','L','2'],
+                                                                        ['S','F','A','B','K','_'],
+                                                                        ['T','G','H','I','J','#'],
+                                                                        ['U','V','W','X','Y','Z']]})
 
         # normal input with default pad
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('HELLO'), {'cipher': '$TUQ#F','key': [['U','E','H','6','3','4'],
-                                                                                ['F','O','W','M','G','9'],
-                                                                                ['C','L','2','Q','K','7'],
-                                                                                ['R','V','N','B','J','_'],
-                                                                                ['S','8','D','I','Y','#'],
-                                                                                ['T','P','A','X','5','Z']]})
+        self.assertEqual(cipher.encrypt('HELLO'), {'cipherText': '$TUQ#F','key': [['U','E','H','6','3','4'],
+                                                                                    ['F','O','W','M','G','9'],
+                                                                                    ['C','L','2','Q','K','7'],
+                                                                                    ['R','V','N','B','J','_'],
+                                                                                    ['S','8','D','I','Y','#'],
+                                                                                    ['T','P','A','X','5','Z']]})
 
         # lowercase input
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('hello'), {'cipher': '$TUQ#F','key': [['U','E','H','6','3','4'],
-                                                                                ['F','O','W','M','G','9'],
-                                                                                ['C','L','2','Q','K','7'],
-                                                                                ['R','V','N','B','J','_'],
-                                                                                ['S','8','D','I','Y','#'],
-                                                                                ['T','P','A','X','5','Z']]})
+        self.assertEqual(cipher.encrypt('hello'), {'cipherText': '$TUQ#F','key': [['U','E','H','6','3','4'],
+                                                                                    ['F','O','W','M','G','9'],
+                                                                                    ['C','L','2','Q','K','7'],
+                                                                                    ['R','V','N','B','J','_'],
+                                                                                    ['S','8','D','I','Y','#'],
+                                                                                    ['T','P','A','X','5','Z']]})
     
 if __name__ == '__main__':
     unittest.main()
