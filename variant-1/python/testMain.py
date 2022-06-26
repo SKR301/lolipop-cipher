@@ -213,30 +213,15 @@ class TestLolipop(unittest.TestCase):
     def test_encrypt(self):
         # empty string
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt(''), {'cipherText': '','key': [['9','8','7','6','5','4'],
-                                                                        ['Q','P','O','N','M','3'],
-                                                                        ['R','E','D','C','L','2'],
-                                                                        ['S','F','A','B','K','_'],
-                                                                        ['T','G','H','I','J','#'],
-                                                                        ['U','V','W','X','Y','Z']]})
+        self.assertEqual(cipher.encrypt(''), {'cipherText': '','key': '987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'})
 
         # normal input with default pad
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('HELLO'), {'cipherText': '$TUQ#F','key': [['U','E','H','6','3','4'],
-                                                                                    ['F','O','W','M','G','9'],
-                                                                                    ['C','L','2','Q','K','7'],
-                                                                                    ['R','V','N','B','J','_'],
-                                                                                    ['S','8','D','I','Y','#'],
-                                                                                    ['T','P','A','X','5','Z']]})
+        self.assertEqual(cipher.encrypt('HELLO'), {'cipherText': '$TUQ#F','key': 'UEH634FOWMG9CL2QK7RVNBJ_S8DIY#TPAX5Z'})
 
         # lowercase input
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('hello'), {'cipherText': '$TUQ#F','key': [['U','E','H','6','3','4'],
-                                                                                    ['F','O','W','M','G','9'],
-                                                                                    ['C','L','2','Q','K','7'],
-                                                                                    ['R','V','N','B','J','_'],
-                                                                                    ['S','8','D','I','Y','#'],
-                                                                                    ['T','P','A','X','5','Z']]})
+        self.assertEqual(cipher.encrypt('hello'), {'cipherText': '$TUQ#F','key': 'UEH634FOWMG9CL2QK7RVNBJ_S8DIY#TPAX5Z'})
     
 if __name__ == '__main__':
     unittest.main()
