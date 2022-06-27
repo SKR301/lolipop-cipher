@@ -47,26 +47,25 @@ class Lolipop:
 
     # encrypt the input plaintext, returns cipher and key
     def encrypt(self, plainText):
-        plainText = plainText.upper()
+        if len(plainText) == 0:
+            return {'cipherText':'', 'key': self.dismantlePadMatrix(self.padMatrix)}
+
+        plainText = 'A'+plainText.upper()+'A'
+        cipherText = ''
         
-        relPosList = []
-        currPos = (3,2)
-        for a in range(0, len(plainText)):
+        currPos = PadMatrix().getPosOfChar(plainText[0], copy.deepcopy(self.padMatrix))
+        for a in range(1, len(plainText)):
             currChar = plainText[a]
+            ind = a-1
             charPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
             relPos = ((charPos[0] - currPos[0]) % 6, (charPos[1] - currPos[1]) % 6)
-            relPosList.append(relPos)
             
-            self.padMatrix = PadMatrix().shiftCol(a%6, relPos[0], copy.deepcopy(self.padMatrix))
-            self.padMatrix = PadMatrix().shiftRow(a%6, relPos[1], copy.deepcopy(self.padMatrix))
+            self.padMatrix = PadMatrix().shiftCol(ind%6, relPos[0], copy.deepcopy(self.padMatrix))
+            self.padMatrix = PadMatrix().shiftRow(ind%6, relPos[1], copy.deepcopy(self.padMatrix))
+
+            cipherText += PadMatrix().getCharAtPos(relPos, copy.deepcopy(self.padMatrix))
             currPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
 
-        relPosList.reverse()
-
-        cipherText = ''
-        for pos in relPosList:
-            cipherText += PadMatrix().getCharAtPos(pos, copy.deepcopy(self.padMatrix))
-        cipherText = cipherText.rjust(math.ceil(len(cipherText)/6)*6, '$')
         key = self.dismantlePadMatrix(self.padMatrix)
 
         return {'cipherText':cipherText, 'key': key}
@@ -74,7 +73,6 @@ class Lolipop:
     # decrypt the input cipherText
     def decrypt(self, cipherText):
         print(f'decrypting: {cipherText}')
-
 
 class PadMatrix:
     # shift the row right given time 
