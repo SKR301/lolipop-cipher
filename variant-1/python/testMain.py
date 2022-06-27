@@ -224,18 +224,17 @@ class TestLolipop(unittest.TestCase):
         self.assertEqual(cipher.encrypt('hello'), {'cipherText': '9#QUT8','key': 'UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5'})
 
     def test_decrypt(self):
-        # # empty string
-        # cipher = Lolipop()
-        # self.assertEqual(cipher.decrypt(''), '')
+        # empty string
+        cipher = Lolipop()
+        self.assertEqual(cipher.decrypt(''), '')
 
-        # # normal input
-        # cipher = Lolipop()
-        # self.assertEqual(cipher.decrypt('$TUQ#F'), 'HELLO')
+        # normal input
+        cipher = Lolipop()
+        self.assertEqual(cipher.decrypt('9#QUT8'), 'HELLO')
 
-        # # lowercase input
-        # cipher = Lolipop()
-        # self.assertEqual(cipher.decrypt('$tuq#f'), 'HELLO')
-        print()
+        # lowercase input
+        cipher = Lolipop()
+        self.assertEqual(cipher.decrypt('9#qut8'), 'HELLO')
         
 if __name__ == '__main__':
     unittest.main()

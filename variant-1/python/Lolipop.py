@@ -72,7 +72,7 @@ class Lolipop:
     
     # decrypt the input cipherText
     def decrypt(self, cipherText):
-        print(f'decrypting: {cipherText}')
+        print()
 
 class PadMatrix:
     # shift the row right given time 

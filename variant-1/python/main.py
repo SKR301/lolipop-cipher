@@ -11,8 +11,8 @@ if __name__ == '__main__':
     print('Crypted:', cipherText)
     print('Key: ', key)
     
-    # print()
+    print()
 
-    # cipher = Lolipop(key)
-    # plainText = cipher.decrypt(cipherText)
-    # print('Decrypted:', plainText)
+    cipher = Lolipop(key)
+    plainText = cipher.decrypt(cipherText)
+    print('Decrypted:', plainText)
