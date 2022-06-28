@@ -55,6 +55,10 @@ class Lolipop:
         
         currPos = PadMatrix().getPosOfChar(plainText[0], copy.deepcopy(self.padMatrix))
         for a in range(1, len(plainText)):
+            if plainText[a] not in self.padString:
+                cipherText += plainText[a]
+                continue
+
             currChar = plainText[a]
             ind = (a-1)%6
             charPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
@@ -76,7 +80,7 @@ class Lolipop:
         if len(cipherText) == 0:
             return ''
 
-        cipherText = cipherText[::-1]
+        cipherText = cipherText[::-1].upper()
 
         decryptText = 'A'
         for a in range(0, len(cipherText)):
@@ -93,11 +97,8 @@ class Lolipop:
             currPos = PadMatrix().getPosOfChar(decryptText[len(decryptText)-1], copy.deepcopy(self.padMatrix))
             relPos = (currPos[0] - charPos[0])%6, (currPos[1] - charPos[1])%6
 
-            # print(currChar, charPos, currPos, relPos, decryptText)
-            # PadMatrix().printPadMatrix(copy.deepcopy(self.padMatrix))
-
             decryptText += PadMatrix().getCharAtPos(relPos, copy.deepcopy(self.padMatrix))
-        return decryptText[1:-1]
+        return decryptText[1:-1][::-1]
 
 class PadMatrix:
     # shift the row right given time 
