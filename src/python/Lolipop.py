@@ -55,24 +55,50 @@ class Lolipop:
         
         currPos = PadMatrix().getPosOfChar(plainText[0], copy.deepcopy(self.padMatrix))
         for a in range(1, len(plainText)):
+            if plainText[a] not in self.padString:
+                cipherText += plainText[a]
+                continue
+
             currChar = plainText[a]
-            ind = a-1
+            ind = (a-1)%6
             charPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
             relPos = ((charPos[0] - currPos[0]) % 6, (charPos[1] - currPos[1]) % 6)
             
-            self.padMatrix = PadMatrix().shiftCol(ind%6, relPos[0], copy.deepcopy(self.padMatrix))
-            self.padMatrix = PadMatrix().shiftRow(ind%6, relPos[1], copy.deepcopy(self.padMatrix))
+            self.padMatrix = PadMatrix().shiftCol(ind, relPos[0], copy.deepcopy(self.padMatrix))
+            self.padMatrix = PadMatrix().shiftRow(ind, relPos[1], copy.deepcopy(self.padMatrix))
 
             cipherText += PadMatrix().getCharAtPos(relPos, copy.deepcopy(self.padMatrix))
             currPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
 
         key = self.dismantlePadMatrix(self.padMatrix)
+        cipherText = cipherText.ljust(math.ceil(len(cipherText)/6)*6, '$')
 
-        return {'cipherText':cipherText, 'key': key}
+        return {'cipherText': cipherText, 'key': key}
     
     # decrypt the input cipherText
     def decrypt(self, cipherText):
-        print(f'decrypting: {cipherText}')
+        if len(cipherText) == 0:
+            return ''
+
+        cipherText = cipherText[::-1].upper()
+
+        decryptText = 'A'
+        for a in range(0, len(cipherText)):
+            if cipherText[a] == '$':
+                continue
+
+            currChar = cipherText[a]
+            ind = (5-a)%6
+            charPos = PadMatrix().getPosOfChar(currChar, copy.deepcopy(self.padMatrix))
+
+            self.padMatrix = PadMatrix().shiftRow(ind, -charPos[1], copy.deepcopy(self.padMatrix))
+            self.padMatrix = PadMatrix().shiftCol(ind, -charPos[0], copy.deepcopy(self.padMatrix))
+
+            currPos = PadMatrix().getPosOfChar(decryptText[len(decryptText)-1], copy.deepcopy(self.padMatrix))
+            relPos = (currPos[0] - charPos[0])%6, (currPos[1] - charPos[1])%6
+
+            decryptText += PadMatrix().getCharAtPos(relPos, copy.deepcopy(self.padMatrix))
+        return decryptText[1:-1][::-1]
 
 class PadMatrix:
     # shift the row right given time 
