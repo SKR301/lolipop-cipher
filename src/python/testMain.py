@@ -223,14 +223,10 @@ class TestLolipop(unittest.TestCase):
         cipher = Lolipop()
         self.assertEqual(cipher.encrypt('hello'), {'cipherText': '9#QUT8','key': 'UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5'})
 
-        # spaces test
-        # cipher = Lolipop()
-        # self.assertEqual(cipher.encrypt('HEL LO'), {'cipherText': '9#Q UT8$$$$$','key': 'UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5'})
-
     def test_decrypt(self):
-        # # empty string
-        # cipher = Lolipop()
-        # self.assertEqual(cipher.decrypt(''), '')
+        # empty string
+        cipher = Lolipop()
+        self.assertEqual(cipher.decrypt(''), '')
 
         # 5char test
         cipher = Lolipop('UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5')
@@ -240,10 +236,6 @@ class TestLolipop(unittest.TestCase):
         cipher = Lolipop('UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5')
         self.assertEqual(cipher.decrypt('9#qut8'), 'HELLO')
         
-        # spaces test
-        # cipher = Lolipop()
-        # self.assertEqual(cipher.decrypt('9#Q UT8$$$$$'), 'HEL LO')
-
     def test_enc_dec(self):
         # single char test
         alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -329,18 +321,6 @@ class TestLolipop(unittest.TestCase):
         cipher = Lolipop(key)
         decryptText = cipher.decrypt(cipherText)
         self.assertEqual(plainText, decryptText)
-
-        # spaces test 
-        # cipher = Lolipop()
-        # crypt = cipher.encrypt('THIS IS SPARTA')
-
-        # cipherText = crypt['cipherText']
-        # key = crypt['key']
-
-        # cipher = Lolipop(key)
-        # decryptText = cipher.decrypt(cipherText)
-        # self.assertEqual(plainText, decryptText)
-
 
 if __name__ == '__main__':
     unittest.main()
