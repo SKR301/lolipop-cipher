@@ -215,13 +215,17 @@ class TestLolipop(unittest.TestCase):
         cipher = Lolipop()
         self.assertEqual(cipher.encrypt(''), {'cipherText': '','key': '987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'})
 
-        # normal input
+        # 5char test
         cipher = Lolipop()
         self.assertEqual(cipher.encrypt('HELLO'), {'cipherText': '9#QUT8','key': 'UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5'})
 
         # lowercase input
         cipher = Lolipop()
         self.assertEqual(cipher.encrypt('hello'), {'cipherText': '9#QUT8','key': 'UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5'})
+
+        # spaces test
+        cipher = Lolipop()
+        self.assertEqual(cipher.encrypt('HEL LO'), {'cipherText': '9#Q UT8','key': 'UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5'})
 
     def test_decrypt(self):
         # empty string
@@ -236,5 +240,101 @@ class TestLolipop(unittest.TestCase):
         cipher = Lolipop()
         self.assertEqual(cipher.decrypt('9#qut8'), 'HELLO')
         
+        # spaces test
+        cipher = Lolipop()
+        self.assertEqual(cipher.decrypt('9#Q UT8'), 'HEL LO')
+
+    def test_enc_dec(self):
+        # single char test
+        alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        for plainText in alphabet:
+            cipher = Lolipop()
+            crypt = cipher.encrypt(plainText)
+
+            cipherText = crypt['cipherText']
+            key = crypt['key']
+
+            cipher = Lolipop(key)
+            decryptText = cipher.decrypt(cipherText)
+            self.assertEqual(plainText, decryptText)
+        
+        # 5char test
+        cipher = Lolipop()
+        crypt = cipher.encrypt('HELLO')
+
+        cipherText = crypt['cipherText']
+        key = crypt['key']
+
+        cipher = Lolipop(key)
+        decryptText = cipher.decrypt(cipherText)
+        self.assertEqual(plainText, decryptText)
+        
+        # 6char test
+        cipher = Lolipop()
+        crypt = cipher.encrypt('HELLOS')
+
+        cipherText = crypt['cipherText']
+        key = crypt['key']
+
+        cipher = Lolipop(key)
+        decryptText = cipher.decrypt(cipherText)
+        self.assertEqual(plainText, decryptText)
+
+        # 7char test 
+        cipher = Lolipop()
+        crypt = cipher.encrypt('NIRVANA')
+
+        cipherText = crypt['cipherText']
+        key = crypt['key']
+
+        cipher = Lolipop(key)
+        decryptText = cipher.decrypt(cipherText)
+        self.assertEqual(plainText, decryptText)
+
+        # 11char test 
+        cipher = Lolipop()
+        crypt = cipher.encrypt('HELLOMARTIN')
+
+        cipherText = crypt['cipherText']
+        key = crypt['key']
+
+        cipher = Lolipop(key)
+        decryptText = cipher.decrypt(cipherText)
+        self.assertEqual(plainText, decryptText)
+
+        # 12char test 
+        cipher = Lolipop()
+        crypt = cipher.encrypt('HELLOSWORLDS')
+
+        cipherText = crypt['cipherText']
+        key = crypt['key']
+
+        cipher = Lolipop(key)
+        decryptText = cipher.decrypt(cipherText)
+        self.assertEqual(plainText, decryptText)
+
+        # 13char test 
+        cipher = Lolipop()
+        crypt = cipher.encrypt('quadruplicate')
+
+        cipherText = crypt['cipherText']
+        key = crypt['key']
+
+        cipher = Lolipop(key)
+        decryptText = cipher.decrypt(cipherText)
+        self.assertEqual(plainText, decryptText)
+
+        # spaces test 
+        cipher = Lolipop()
+        crypt = cipher.encrypt('THIS IS SPARTA')
+
+        cipherText = crypt['cipherText']
+        key = crypt['key']
+
+        cipher = Lolipop(key)
+        decryptText = cipher.decrypt(cipherText)
+        self.assertEqual(plainText, decryptText)
+
+
 if __name__ == '__main__':
     unittest.main()

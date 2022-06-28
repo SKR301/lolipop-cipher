@@ -2,17 +2,22 @@ from Lolipop import Lolipop
 from Lolipop import PadMatrix
 
 if __name__ == '__main__':
-    cipher = Lolipop()
-    crypt = cipher.encrypt('HELLO')
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    for plainText in alphabet:
+        cipher = Lolipop()
+        crypt = cipher.encrypt(plainText)
 
-    cipherText = crypt['cipherText']
-    key = crypt['key']
+        cipherText = crypt['cipherText']
+        key = crypt['key']
+        print()
+        print('PlainText:', plainText)
+        print('Crypted:', cipherText)
+        print('Key: ', key)
+        #     PadMatrix().printPadMatrix(cipher.createPadMatrix(key))
+        #     print()
 
-    print('Crypted:', cipherText)
-    print('Key: ', key)
-    
-    print()
+        cipher = Lolipop(key)
+        decrypt = cipher.decrypt(cipherText)
+        print('Decrypted:', decrypt)
 
-    cipher = Lolipop(key)
-    plainText = cipher.decrypt(cipherText)
-    print('Decrypted:', plainText)
+        
