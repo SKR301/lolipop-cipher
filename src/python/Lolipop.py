@@ -3,7 +3,7 @@ import math
 import numpy as np
 
 class Lolipop:
-    def __init__(self, input='987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'):
+    def __init__(self, input='ABCDEFGHIJKLMNOPQRSTUVWXYZ#_23456789'):
         input = input.upper()
         self.padString = ''
         if self.validatePadInput(input):
@@ -28,10 +28,16 @@ class Lolipop:
 
     # create and return a pad matrix 
     def createPadMatrix(self, padInput):
-        val = 1
+        val = 0
         y,x=3,2
-        padMatrix = np.zeros((6,6))
-        padMatrix[y][x] = val
+        padMatrix = []
+        for a in range(6):
+            temp = []
+            for b in range(6):
+                temp.append(0)
+            padMatrix.append(temp)
+
+        padMatrix[y][x] = padInput[val]
 
         for a in range(1,7):
             if a % 2 != 0:
@@ -39,27 +45,25 @@ class Lolipop:
                     for b in range(a):
                         x += 1
                         val += 1
-                        padMatrix[y][x] = val
+                        padMatrix[y][x] = padInput[val]
                     for b in range(a):
                         y -= 1
                         val += 1
-                        padMatrix[y][x] = val
+                        padMatrix[y][x] = padInput[val]
                 except:
-                    print()
+                    pass
             else:
                 try:
                     for b in range(a):
                         x -= 1
                         val += 1
-                        padMatrix[y][x] = val
+                        padMatrix[y][x] = padInput[val]
                     for b in range(a):
                         y += 1
                         val += 1
-                        padMatrix[y][x] = val
+                        padMatrix[y][x] = padInput[val]
                 except:
-                    print()
-
-        PadMatrix.printPadMatrix(self, padMatrix)
+                    pass
 
         return padMatrix
 
