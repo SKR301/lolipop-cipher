@@ -1,6 +1,5 @@
 import copy
 import math
-import numpy as np
 
 class Lolipop:
     def __init__(self, input='ABCDEFGHIJKLMNOPQRSTUVWXYZ#_23456789'):
@@ -99,7 +98,7 @@ class Lolipop:
 
                     if a == 6:
                         break
-                    
+
                     for b in range(a):
                         y += 1
                         val += 1
