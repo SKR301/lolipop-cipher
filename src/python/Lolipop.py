@@ -1,5 +1,6 @@
 import copy
 import math
+import numpy as np
 
 class Lolipop:
     def __init__(self, input='987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'):
@@ -27,13 +28,38 @@ class Lolipop:
 
     # create and return a pad matrix 
     def createPadMatrix(self, padInput):
-        padMatrix = []
+        val = 1
+        y,x=3,2
+        padMatrix = np.zeros((6,6))
+        padMatrix[y][x] = val
 
-        for a in range(6):
-            temp = []
-            for b in range(6):
-                temp.append(padInput[a * 6 + b])
-            padMatrix.append(temp)
+        for a in range(1,7):
+            if a % 2 != 0:
+                try:
+                    for b in range(a):
+                        x += 1
+                        val += 1
+                        padMatrix[y][x] = val
+                    for b in range(a):
+                        y -= 1
+                        val += 1
+                        padMatrix[y][x] = val
+                except:
+                    print()
+            else:
+                try:
+                    for b in range(a):
+                        x -= 1
+                        val += 1
+                        padMatrix[y][x] = val
+                    for b in range(a):
+                        y += 1
+                        val += 1
+                        padMatrix[y][x] = val
+                except:
+                    print()
+
+        PadMatrix.printPadMatrix(self, padMatrix)
 
         return padMatrix
 
