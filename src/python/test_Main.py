@@ -38,7 +38,7 @@ class TestLolipop(unittest.TestCase):
         cipher = Lolipop()
 
         # default pad matrix
-        self.assertEqual(cipher.createPadMatrix('987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'), [['9','8','7','6','5','4'],
+        self.assertEqual(cipher.createPadMatrix('ABCDEFGHIJKLMNOPQRSTUVWXYZ#_23456789'), [['9','8','7','6','5','4'],
                                                                                             ['Q','P','O','N','M','3'],
                                                                                             ['R','E','D','C','L','2'],
                                                                                             ['S','F','A','B','K','_'],
@@ -46,12 +46,12 @@ class TestLolipop(unittest.TestCase):
                                                                                             ['U','V','W','X','Y','Z']])
 
         # manual input pad string 
-        self.assertEqual(cipher.createPadMatrix('S54ABK_XIJTGHL2#UEDCYZWQF9VPONM3R876'), [['S','5','4','A','B','K'],
-                                                                                            ['_','X','I','J','T','G'],
-                                                                                            ['H','L','2','#','U','E'],
-                                                                                            ['D','C','Y','Z','W','Q'],
-                                                                                            ['F','9','V','P','O','N'],
-                                                                                            ['M','3','R','8','7','6']])
+        self.assertEqual(cipher.createPadMatrix('S54ABK_XIJTGHL2#UEDCYZWQF9VPONM3R876'), [['6','7','8','R','3','M'],
+                                                                                            ['U','#','2','L','H','N'],
+                                                                                            ['E','B','A','4','G','O'],
+                                                                                            ['D','K','S','5','T','P'],
+                                                                                            ['C','_','X','I','J','V'],
+                                                                                            ['Y','Z','W','Q','F','9']])
 
     def test_dismantlePadMatrix(self):
         cipher = Lolipop()
@@ -62,15 +62,15 @@ class TestLolipop(unittest.TestCase):
                                                     ['R','E','D','C','L','2'],
                                                     ['S','F','A','B','K','_'],
                                                     ['T','G','H','I','J','#'],
-                                                    ['U','V','W','X','Y','Z']]), '987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ')
+                                                    ['U','V','W','X','Y','Z']]), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#_23456789')
 
         # dismantle manual input pad string 
-        self.assertEqual(cipher.dismantlePadMatrix([['S','5','4','A','B','K'],
-                                                    ['_','X','I','J','T','G'],
-                                                    ['H','L','2','#','U','E'],
-                                                    ['D','C','Y','Z','W','Q'],
-                                                    ['F','9','V','P','O','N'],
-                                                    ['M','3','R','8','7','6']]), 'S54ABK_XIJTGHL2#UEDCYZWQF9VPONM3R876')
+        self.assertEqual(cipher.dismantlePadMatrix([['6','7','8','R','3','M'],
+                                                    ['U','#','2','L','H','N'],
+                                                    ['E','B','A','4','G','O'],
+                                                    ['D','K','S','5','T','P'],
+                                                    ['C','_','X','I','J','V'],
+                                                    ['Y','Z','W','Q','F','9']]), 'S54ABK_XIJTGHL2#UEDCYZWQF9VPONM3R876')
 
     def test_shiftRow(self):
         shift = PadMatrix()
@@ -213,15 +213,15 @@ class TestLolipop(unittest.TestCase):
     def test_encrypt(self):
         # empty string
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt(''), {'cipherText': '','key': '987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ'})
+        self.assertEqual(cipher.encrypt(''), {'cipherText': '','key': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#_23456789'})
 
         # 5char test
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('HELLO'), {'cipherText': '9#QUT8','key': 'UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5'})
+        self.assertEqual(cipher.encrypt('HELLO'), {'cipherText': '9#QUT8','key': 'NBQ2LV8DIYJKGMWOFCRS9TPAX54Z#_736HEU'})
 
         # lowercase input
         cipher = Lolipop()
-        self.assertEqual(cipher.encrypt('hello'), {'cipherText': '9#QUT8','key': 'UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5'})
+        self.assertEqual(cipher.encrypt('hello'), {'cipherText': '9#QUT8','key': 'NBQ2LV8DIYJKGMWOFCRS9TPAX54Z#_736HEU'})
 
     def test_decrypt(self):
         # empty string
@@ -229,11 +229,11 @@ class TestLolipop(unittest.TestCase):
         self.assertEqual(cipher.decrypt(''), '')
 
         # 5char test
-        cipher = Lolipop('UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5')
+        cipher = Lolipop('NBQ2LV8DIYJKGMWOFCRS9TPAX54Z#_736HEU')
         self.assertEqual(cipher.decrypt('9#QUT8'), 'HELLO')
 
         # lowercase input
-        cipher = Lolipop('UEH637FOWMG_CL2QK#RVNBJZS8DIY49TPAX5')
+        cipher = Lolipop('NBQ2LV8DIYJKGMWOFCRS9TPAX54Z#_736HEU')
         self.assertEqual(cipher.decrypt('9#qut8'), 'HELLO')
         
     def test_enc_dec(self):
