@@ -21,7 +21,8 @@ print('Crypted:', cipherText)
 print('Key: ', key)
 print('Decrypted:', decrypt)
 ```
-![image](https://user-images.githubusercontent.com/47807051/176242627-0b543604-26bb-49a9-873b-3f32b810bc33.png)
+![image](https://user-images.githubusercontent.com/47807051/178112295-a530e620-b30d-4e99-8dd6-49e57be517cf.png)
+
 
 ### Note:
 *Cipher is vulnerable against* ***Cryptanalysis***, *Please do not use it for sensitive data*
