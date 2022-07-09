@@ -21,7 +21,7 @@ class Lolipop:
             return False
         if len(padInput) > 36:
             return False
-        if set('987654QPONM3REDCL2SFABK_TGHIJ#UVWXYZ') != set(padInput):
+        if set('ABCDEFGHIJKLMNOPQRSTUVWXYZ#_23456789') != set(padInput):
             return False
         
         return True
@@ -51,7 +51,7 @@ class Lolipop:
                         val += 1
                         padMatrix[y][x] = padInput[val]
                 except:
-                    pass
+                    break
             else:
                 try:
                     for b in range(a):
@@ -63,16 +63,50 @@ class Lolipop:
                         val += 1
                         padMatrix[y][x] = padInput[val]
                 except:
-                    pass
+                    break
 
         return padMatrix
 
     # create dismantled string from pad matrix 
     def dismantlePadMatrix(self, matrix):
         dismantledStr = ''
-        for row in matrix:
-            for ch in row:
-                dismantledStr += ch
+        val = 0
+        y,x=3,2
+
+        dismantledStr = matrix[y][x]
+
+        for a in range(1,7):
+            if a % 2 != 0:
+                try:
+                    for b in range(a):
+                        x += 1
+                        val += 1
+                        dismantledStr += matrix[y][x]
+                    for b in range(a):
+                        y -= 1
+                        val += 1
+                        dismantledStr += matrix[y][x]
+                except:
+                    break
+            else:
+                try:
+                    for b in range(a):
+                        if b == 5:
+                            break
+                        x -= 1
+                        val += 1
+                        dismantledStr += matrix[y][x]
+
+                    if a == 6:
+                        break
+                    
+                    for b in range(a):
+                        y += 1
+                        val += 1
+                        dismantledStr += matrix[y][x]
+                except:
+                    break
+
         return dismantledStr
 
     # encrypt the input plaintext, returns cipher and key
