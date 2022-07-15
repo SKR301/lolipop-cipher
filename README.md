@@ -25,4 +25,4 @@ print('Decrypted:', decrypt)
 
 
 ### Note:
-*Cipher is vulnerable against* ***Cryptanalysis***, *Please do not use it for sensitive data*
+*Cipher is vulnerable against* ***Plaintext-Ciphertext Pair Cryptanalysis***, *Please do not use it for sensitive data*
